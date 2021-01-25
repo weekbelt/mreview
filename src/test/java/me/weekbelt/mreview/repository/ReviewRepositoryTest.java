@@ -2,6 +2,7 @@ package me.weekbelt.mreview.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.stream.IntStream;
 import me.weekbelt.mreview.entity.Member;
 import me.weekbelt.mreview.entity.Movie;
@@ -38,6 +39,23 @@ class ReviewRepositoryTest {
                 .build();
 
             reviewRepository.save(movieReview);
+        });
+    }
+
+    @Test
+    public void testGetMovieReviews() {
+        Movie movie = Movie.builder()
+            .mno(92L)
+            .build();
+
+        List<Review> result = reviewRepository.findByMovie(movie);
+
+        result.forEach(movieReview -> {
+            System.out.print(movieReview.getReviewnum());
+            System.out.print("\t" + movieReview.getGrade());
+            System.out.print("\t" + movieReview.getText());
+            System.out.print("\t" + movieReview.getMember().getEmail());
+            System.out.println("-------------------------------");
         });
     }
 }

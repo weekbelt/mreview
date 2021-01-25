@@ -5,12 +5,17 @@ import me.weekbelt.mreview.entity.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class MemberRepositoryTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Test
     public void insertMembers() {
@@ -22,6 +27,22 @@ class MemberRepositoryTest {
                 .build();
             memberRepository.save(member);
         });
+    }
+
+    @Commit
+    @Transactional
+    @Test
+    public void testDeleteMember() {
+
+        Long mid = 1L;  // Member의 mid
+
+        Member member = Member.builder().mid(mid).build();
+
+//        memberRepository.deleteById(mid);
+//        reviewRepository.deleteByMember(member);
+
+        reviewRepository.deleteByMember(member);
+        memberRepository.deleteById(mid);
     }
 
 }
