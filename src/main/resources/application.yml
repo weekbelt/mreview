@@ -17,3 +17,10 @@ spring:
 
   thymeleaf:
     cache: false
+
+  servlet:
+    multipart:
+      enabled: true
+      location: /Users/joohyuk/Pictures/movieImg
+      max-request-size: 30MB
+      max-file-size: 10MB
