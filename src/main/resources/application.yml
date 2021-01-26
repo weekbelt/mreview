@@ -24,3 +24,8 @@ spring:
       location: /Users/joohyuk/Pictures/movieImg
       max-request-size: 30MB
       max-file-size: 10MB
+
+me:
+  weekbelt:
+    upload:
+      path: /Users/joohyuk/Pictures/movieImg
