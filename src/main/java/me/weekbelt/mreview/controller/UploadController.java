@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import me.weekbelt.mreview.dto.UploadResultDTO;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -63,6 +64,14 @@ public class UploadController {
 
             try {
                 uploadFile.transferTo(savePath);    // 실제 이미지 저장
+
+                // 섬네일 생성
+                String thumbnailSaveName =
+                    uploadPath + File.separator + folderPath + File.separator + "s_" + uuid + "_" + fileName;
+                // 섬네일 파일 이름은 중간에 s_로 시작하도록
+                File thumbnailFile = new File(thumbnailSaveName);
+                // 섬네일 생성
+                Thumbnailator.createThumbnail(savePath.toFile(), thumbnailFile, 100, 100);
                 resultDTOList.add(new UploadResultDTO(fileName, uuid, folderPath));
             } catch (IOException e) {
                 e.printStackTrace();
