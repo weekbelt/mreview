@@ -15,7 +15,6 @@ import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import me.weekbelt.mreview.dto.UploadResultDTO;
 import net.coobird.thumbnailator.Thumbnailator;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
