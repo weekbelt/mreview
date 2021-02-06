@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import me.weekbelt.mreview.dto.MovieDTO;
+import me.weekbelt.mreview.dto.PageRequestDTO;
 import me.weekbelt.mreview.dto.PageResultDTO;
 import me.weekbelt.mreview.entity.Movie;
 import me.weekbelt.mreview.entity.MovieImage;
-import org.springframework.data.domain.jaxb.SpringDataJaxb.PageRequestDto;
 
 public interface MovieService {
 
     Long register(MovieDTO movieDTO);
 
-    PageResultDTO<MovieDTO, Object[]> getList(PageRequestDto requestDto);
+    PageResultDTO<MovieDTO, Object[]> getList(PageRequestDTO requestDTO);
 
     default MovieDTO entityToDTO(Movie movie, List<MovieImage> movieImages, Double avg, Long reviewCnt) {
         MovieDTO movieDTO = MovieDTO.builder()
@@ -25,11 +25,10 @@ public interface MovieService {
             .build();
 
         movieImages.stream().map(movieImage -> {
-            return MovieImageDTO.builder().imgName(movieImage.getImgName())
+            MovieIMageDTO.builder().imgName(movieImage.getImgName())
                 .path(movieImage.getPath())
                 .uuid(movieImage.getBuild())
-                .build();
-        }).collect(Collectors.toList());
+                .build()).collect(Collectors.toList());
 
         movieDTO.setImageDTOList(movieImageDTOList);
         movieDTO.setAge(avg);

@@ -18,7 +18,6 @@ public class MovieDTO {
 
     private String title;
 
-    @Builder.Default
     private List<MovieImageDTO> imageDTOList = new ArrayList<>();
 
     private double age;
